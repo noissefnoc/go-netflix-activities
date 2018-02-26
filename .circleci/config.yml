@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    docker:
+
+      - image: circleci/golang:1.9
+
+    working_directory: /go/src/github.com/noissefnoc/go-netflix-activities
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependency modules
+          command: make deps
+
+      - run:
+          name: Run unit tests
+          command: make test
+
+      - run:
+          name: Build module
+          command: make
