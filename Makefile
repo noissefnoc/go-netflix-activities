@@ -11,6 +11,7 @@ bin/$(NAME): $(SRCS)
 	go build $(LDFLAGS) -o bin/$(NAME)
 
 .PHONY: clean
+clean:
 	rm -rf bin/*
 	rm -rf dist/*
 	rm -rf vendor/*
