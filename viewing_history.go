@@ -9,6 +9,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"bytes"
+	"github.com/olekukonko/tablewriter"
+	"encoding/csv"
 )
 
 var dateLayout = "2006/01/02"
@@ -101,7 +103,15 @@ func (vh *ViewingHistory) SaveData(path string) (error) {
 	return nil
 }
 
-func (vh *ViewingHistory) Print(limit int, displayType string, w io.Writer) {
+func (vh *ViewingHistory) Print(limit int, fromat string, w io.Writer) {
+	switch fromat {
+	case "csv": vh.CsvPrint(limit, w);
+	case "table": vh.TablePrint(limit, w);
+	default: vh.SimplePrint(limit, w)
+	}
+}
+
+func (vh *ViewingHistory) SimplePrint(limit int, w io.Writer) {
 	for i, r := range vh.Records {
 		if i > limit - 1 {
 			break
@@ -109,4 +119,35 @@ func (vh *ViewingHistory) Print(limit int, displayType string, w io.Writer) {
 
 		fmt.Fprintf(w, "%s\t%s\n", r.Date.Format(dateLayout), r.Title)
 	}
+}
+
+func (vh *ViewingHistory) CsvPrint(limit int, w io.Writer) {
+	writer := csv.NewWriter(w)
+	writer.UseCRLF = true
+	writer.Write([]string {"view_date", "video_title"})
+
+	for i, r := range vh.Records {
+		if i > limit - 1 {
+			break
+		}
+
+		writer.Write([]string {r.Date.Format(dateLayout), r.Title})
+	}
+
+	writer.Flush()
+}
+
+func (vh *ViewingHistory) TablePrint(limit int, w io.Writer) {
+	writer := tablewriter.NewWriter(w)
+	writer.SetHeader([]string{"view_date", "video_title"})
+
+	for i, r := range vh.Records {
+		if i > limit - 1 {
+			break
+		}
+
+		writer.Append([]string {r.Date.Format(dateLayout), r.Title})
+	}
+
+	writer.Render()
 }
