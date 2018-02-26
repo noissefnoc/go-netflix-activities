@@ -37,8 +37,8 @@ The config file format is [toml](https://github.com/toml-lang/toml) as follow:
 
 ```settings.toml
 [Auth]
-email = <YOUR_EMAIL>
-password = <YOUR_PASSWORD>
+email = "YOUR_EMAIL"
+password = "YOUR_PASSWORD"
 ```
 
 
