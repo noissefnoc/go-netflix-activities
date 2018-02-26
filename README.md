@@ -1,6 +1,8 @@
 netflix-activities
 ==================
 
+[![CircleCI](https://circleci.com/gh/noissefnoc/go-netflix-activities/tree/master.svg?style=svg)](https://circleci.com/gh/noissefnoc/go-netflix-activities/tree/master)
+
 `netflix-activities` fetches Netflix User's Own Activities by Scraping.
 
 
