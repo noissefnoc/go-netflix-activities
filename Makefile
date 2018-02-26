@@ -56,4 +56,4 @@ release:
 
 .PHONY: test
 test:
-	go test -cover -v
+	go test -cover -v ./...
