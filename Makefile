@@ -27,6 +27,8 @@ cross-build:
 deps: dep
 	dep ensure
 
+DIST_DIRS := find * -type d -exec
+
 .PHONY: dist
 dist:
 	cd dist && \
