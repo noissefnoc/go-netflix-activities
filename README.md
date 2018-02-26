@@ -69,19 +69,20 @@ $ netflix-activities -help
 Install
 --------
 
-If you are macOS user, you need to install ChromeDriver 2.13+ via [Homebrew](https://brew.sh/) first.
+If you are macOS user, you can install via [Homebrew](https://brew.sh/).
 
 ```
-$ brew install chromedriver
+$ brew tap noissefnoc/homebrew-go-netflix-activities
+$ brew install go-netflix-activities
 ```
 
-And then, you can use `go get`
+Other OS users can download binary from [release page](https://github.com/noissefnoc/go-netflix-activities/releases).
+
+And you can also use `go get`
 
 ```
 $ go get -u github.com/noissefnoc/netflix-activities
 ```
-
-I currently prepare download binary on release page and `homebrew`.
 
 
 Author
