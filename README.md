@@ -7,7 +7,7 @@ netflix-activities
 Usage
 -----
 
-To use `netflix-activities` is simple. After create Netflix authentication settings (see more on [Netflix Authentication Settings](https://github.com/noissefnoc/netflix-activities#netflix-authentication-settings) section) file, and run the following command on the same directory:
+To use `netflix-activities` is simple. After create Netflix authentication settings (see more on [Netflix Authentication Settings](https://github.com/noissefnoc/go-netflix-activities#netflix-authentication-settings) section) file, and run the following command on the same directory:
 
 ```
 $ netflix-activities [option]
