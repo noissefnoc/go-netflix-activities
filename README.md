@@ -53,6 +53,7 @@ $ netflix-activities \
     -data PATH  \        # Set data file path (default: viewing_history.json)
     -limit NUM  \        # Set amount of displaying viewing history (default: 10)
     -expire NUM \        # Set amount of minutes keeping viewing history before you get (default: 60)
+    -format TYPE \       # Set display type (simple/csv/table. default: simple)
 ```
 
 you can also display version and usage:

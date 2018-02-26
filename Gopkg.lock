@@ -20,6 +20,18 @@
   version = "v1.0.0"
 
 [[projects]]
+  name = "github.com/mattn/go-runewidth"
+  packages = ["."]
+  revision = "9e777a8366cce605130a531d2cd6363d07ad7317"
+  version = "v0.0.2"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/olekukonko/tablewriter"
+  packages = ["."]
+  revision = "b8a9be070da40449e501c3c4730a889e42d87a9e"
+
+[[projects]]
   branch = "master"
   name = "github.com/sclevine/agouti"
   packages = [".","api","api/internal/bus","api/internal/service","internal/element","internal/target"]
@@ -35,6 +47,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "d3731e98647559bcb54ddfdec0d57d569417cf6aaa2333d0b3922fea128a79ce"
+  inputs-digest = "56701fa25f7e2c300e757f36c2a3f24c0a8f96674956d3b61c4d940c58a8972f"
   solver-name = "gps-cdcl"
   solver-version = 1
