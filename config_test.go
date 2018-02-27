@@ -5,7 +5,7 @@ import "testing"
 func TestReadNormalCase(t *testing.T) {
 	config := &Config{}
 
-	err := config.Read("./test/resources/test.toml")
+	err := config.Read("./test/resources/config/test.toml")
 
 	if err != nil {
 		t.Fatalf("failed test %#v", err)

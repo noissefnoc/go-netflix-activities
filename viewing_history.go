@@ -13,6 +13,7 @@ import (
 	"encoding/csv"
 )
 
+var timeNowFunc = time.Now
 var dateLayout = "2006/01/02"
 
 type ViewingHistory struct {
@@ -43,7 +44,7 @@ func (vh *ViewingHistory) LoadFromHTML(html []byte) (error) {
 		vh.Records = append(vh.Records, record)
 	})
 
-	vh.LastUpdate = time.Now()
+	vh.LastUpdate = timeNowFunc()
 
 	return nil
 }
@@ -68,10 +69,10 @@ func (vh *ViewingHistory) LoadFromFile(path string) (error) {
 
 func (vh *ViewingHistory) Expire(path string, min int) (bool) {
 	if err := vh.LoadFromFile(path); err != nil {
-		return false
+		return true
 	}
 
-	now := time.Now()
+	now := timeNowFunc()
 	last := vh.LastUpdate
 
 	if now.Before(last.Add(time.Duration(min) * time.Minute)) {
