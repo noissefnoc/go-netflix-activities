@@ -1,7 +1,7 @@
 netflix-activities
 ==================
 
-[![CircleCI](https://circleci.com/gh/noissefnoc/go-netflix-activities/tree/master.svg?style=svg)](https://circleci.com/gh/noissefnoc/go-netflix-activities/tree/master)
+[![CircleCI](https://circleci.com/gh/noissefnoc/go-netflix-activities/tree/master.svg?style=svg)](https://circleci.com/gh/noissefnoc/go-netflix-activities/tree/master) [![Coverage Status](https://coveralls.io/repos/github/noissefnoc/go-netflix-activities/badge.svg?branch=master)](https://coveralls.io/github/noissefnoc/go-netflix-activities?branch=master)
 
 `netflix-activities` fetches Netflix User's Own Activities by Scraping.
 
