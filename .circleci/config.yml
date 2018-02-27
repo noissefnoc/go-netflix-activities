@@ -25,7 +25,6 @@ jobs:
           name: Run unit tests
           command: |
             go test -v -cover -race -coverprofile=coverage.out
-            gometalinter --deadline 30s ./...
             goveralls -coverprofile=coverage.out -service=circle-ci -repotoken $COVERALLS_TOKEN
 
       - run:
