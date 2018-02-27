@@ -14,8 +14,22 @@ jobs:
           command: make deps
 
       - run:
+          name: Install coverage tool and static analysis
+          command: |
+            go get github.com/axw/gocov/gocov
+            go get github.com/mattn/goveralls
+            go get -u github.com/alecthomas/gometalinter
+            gometalinter --install
+
+      - run:
           name: Run unit tests
           command: make test
+
+      - run:
+          name: Run coverage and static analysis
+          command: |
+            gometalinter --deadline 30s ./...
+            goveralls -v -service=circle-ci -repotoken $COVERALLS_TOKEN ./...
 
       - run:
           name: Build module
