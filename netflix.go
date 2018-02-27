@@ -12,6 +12,8 @@ type Netflix struct {
 	Debug bool
 }
 
+var netflixURL = "https://www.netflix.com"
+
 // Following CSS selectors may change various reasons.
 // So I extract those to variables.
 var loginFormIdSelector = "#email"
@@ -19,7 +21,7 @@ var loginFormPasswordSelector = "#password"
 var loginFormSubmitButtonSelector = ".login-button"
 var viewingHistoryListSelector = "li.retableRow"
 var viewingHistoryDateSelector = ".col.date.nowrap"
-var viewingHistoryTitleSelector = ".col.title"
+var viewingHistoryTitleSelector = ".col.title a"
 
 func (n *Netflix) FetchViewingHistory(email string, password string) (error) {
 	// TODO: enable debug option
