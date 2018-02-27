@@ -4,5 +4,7 @@ vendor/*
 bin/*
 dist/*
 *.json
+!test/resources/viewing_history/*.json
 *.toml
 !Gopkg.toml
+!test/resources/config/*.toml
