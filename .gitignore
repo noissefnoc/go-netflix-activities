@@ -6,3 +6,4 @@ dist/*
 *.json
 *.toml
 !Gopkg.toml
+!test/resources/config/*
