@@ -1,5 +1,5 @@
 NAME := netflix-activities
-VERSION := v0.0.3
+VERSION := v0.0.4
 REVISION := $(shell git rev-parse --short HEAD)
 
 SRCS := $(shell find . -type f -name '*.go')
@@ -19,7 +19,7 @@ clean:
 .PHONY: cross-build
 cross-build:
 	for os in darwin linux windows; do \
-		for arch in amd64 386; do \
+		for arch in amd64; do \
 			GOOS=$$os GOARCH=$$arch CGO_ENABLED=0 go build -a -tags netgo -installsuffix netgo $(LDFLAGS) -o dist/$$os-$$arch/$(NAME); \
 		done; \
 	done
