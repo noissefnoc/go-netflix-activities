@@ -26,6 +26,7 @@ jobs:
           command: |
             go test -v -cover -race -coverprofile=coverage.out
             goveralls -coverprofile=coverage.out -service=circle-ci -repotoken $COVERALLS_TOKEN
+            gometalinter --deadline 30s $(go list ./... | grep -v 'vendor/')
 
       - run:
           name: Build module
