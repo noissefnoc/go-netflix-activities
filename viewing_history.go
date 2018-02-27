@@ -24,6 +24,7 @@ type ViewingHistory struct {
 type ViewingRecord struct {
 	Date time.Time
 	Title string
+	VideoURL string
 }
 
 func (vh *ViewingHistory) LoadFromHTML(html []byte) (error) {
@@ -40,6 +41,9 @@ func (vh *ViewingHistory) LoadFromHTML(html []byte) (error) {
 
 		record.Date = date
 		record.Title = s.Find(viewingHistoryTitleSelector).Text()
+
+		videoURL, _ := s.Find(viewingHistoryTitleSelector).Attr("href")
+		record.VideoURL = netflixURL + videoURL
 
 		vh.Records = append(vh.Records, record)
 	})
@@ -118,21 +122,21 @@ func (vh *ViewingHistory) SimplePrint(limit int, w io.Writer) {
 			break
 		}
 
-		fmt.Fprintf(w, "%s\t%s\n", r.Date.Format(dateLayout), r.Title)
+		fmt.Fprintf(w, "%s\t%s\t%s\n", r.Date.Format(dateLayout), r.Title, r.VideoURL)
 	}
 }
 
 func (vh *ViewingHistory) CsvPrint(limit int, w io.Writer) {
 	writer := csv.NewWriter(w)
 	writer.UseCRLF = true
-	writer.Write([]string {"view_date", "video_title"})
+	writer.Write([]string {"view_date", "video_title", "video_url"})
 
 	for i, r := range vh.Records {
 		if i > limit - 1 {
 			break
 		}
 
-		writer.Write([]string {r.Date.Format(dateLayout), r.Title})
+		writer.Write([]string {r.Date.Format(dateLayout), r.Title, r.VideoURL})
 	}
 
 	writer.Flush()
@@ -140,14 +144,14 @@ func (vh *ViewingHistory) CsvPrint(limit int, w io.Writer) {
 
 func (vh *ViewingHistory) TablePrint(limit int, w io.Writer) {
 	writer := tablewriter.NewWriter(w)
-	writer.SetHeader([]string{"view_date", "video_title"})
+	writer.SetHeader([]string{"view_date", "video_title", "video_url"})
 
 	for i, r := range vh.Records {
 		if i > limit - 1 {
 			break
 		}
 
-		writer.Append([]string {r.Date.Format(dateLayout), r.Title})
+		writer.Append([]string {r.Date.Format(dateLayout), r.Title, r.VideoURL})
 	}
 
 	writer.Render()
