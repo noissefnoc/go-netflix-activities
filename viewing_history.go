@@ -78,6 +78,7 @@ func (vh *ViewingHistory) Expire(path string, min int) (bool) {
 
 	now := timeNowFunc()
 	last := vh.LastUpdate
+	vh.Records = nil // ensure Records are emmpty
 
 	if now.Before(last.Add(time.Duration(min) * time.Minute)) {
 		return false
