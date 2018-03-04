@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/BurntSushi/toml"
+	"os"
 )
 
 type Config struct {
@@ -16,10 +17,18 @@ type AuthConfig struct {
 }
 
 func (c *Config) Read(path string) (err error) {
-	_, err = toml.DecodeFile(path, c)
+	email := os.Getenv("NF_EMAIL")
+	password := os.Getenv("NF_PASSWORD")
 
-	if err != nil {
-		return fmt.Errorf("faild to read config:%v", err)
+	if len(email) != 0 && len(password) != 0 {
+		c.Auth.Email = email
+		c.Auth.Password = password
+	} else {
+		_, err = toml.DecodeFile(path, c)
+
+		if err != nil {
+			return fmt.Errorf("faild to read config:%v", err)
+		}
 	}
 
 	return nil
