@@ -18,24 +18,26 @@ $ netflix-activities [option]
 and you can get activities(currently viewing history only) as follow:
 
 ```
-# View Date   Video Title
-2018/02/25      私立探偵ダーク・ジェントリー: シーズン1: もっと強引に
-2018/02/25      私立探偵ダーク・ジェントリー: シーズン1: 地下迷路
-2018/02/25      私立探偵ダーク・ジェントリー: シーズン1: 壁マニア
-2018/02/25      私立探偵ダーク・ジェントリー: シーズン1: 迷いの中で
-2018/02/25      私立探偵ダーク・ジェントリー: シーズン1: 新たな地平
+# View Date   Video Title   Video URL
+2018/02/25      私立探偵ダーク・ジェントリー: シーズン1: もっと強引に https://www.netflix.com/title/80132376  
+2018/02/25      私立探偵ダーク・ジェントリー: シーズン1: 地下迷路 https://www.netflix.com/title/80132376
+2018/02/25      私立探偵ダーク・ジェントリー: シーズン1: 壁マニア https://www.netflix.com/title/80132375
+2018/02/25      私立探偵ダーク・ジェントリー: シーズン1: 迷いの中で    https://www.netflix.com/title/80132374
+2018/02/25      私立探偵ダーク・ジェントリー: シーズン1: 新たな地平    https://www.netflix.com/title/80132373
 ... 
 ```
 
 I'm sorry for illustrating in Japanese but I can only see Japanese version.
 
-
+**NOTE**: `Video URL` added from v0.0.4
 
 ### Netflix Authentication Settings
 
-To use `netflix-activities`, you need to write Netflix Authentication Settings(email and password) at config file.
+To use `netflix-activities`, you need to write Netflix Authentication Settings(email and password) by configuration file or environmental variables.
 
-The config file format is [toml](https://github.com/toml-lang/toml) as follow:
+#### Configuration file
+
+Configuration file format is [toml](https://github.com/toml-lang/toml) as follow:
 
 ```settings.toml
 [Auth]
@@ -43,6 +45,16 @@ email = "YOUR_EMAIL"
 password = "YOUR_PASSWORD"
 ```
 
+#### Environmental variables
+
+Environmental variable definition as follow:
+
+```
+export NF_EMAIL="YOUR_EMAIL"
+export NF_PASSWORD="YOUR_PASSORD"
+```
+
+It's convenient for running app some PaaS.
 
 Options
 --------
