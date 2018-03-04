@@ -1,5 +1,5 @@
 NAME := netflix-activities
-VERSION := v0.0.5
+VERSION := v0.0.6
 REVISION := $(shell git rev-parse --short HEAD)
 
 SRCS := $(shell find . -type f -name '*.go')
