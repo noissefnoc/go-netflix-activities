@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func TestReadNormalWEnvCase(t *testing.T) {
+func TestConfig_Read_NormalWEnvCase(t *testing.T) {
 	os.Setenv("NF_EMAIL", "env@example.com")
 	os.Setenv("NF_PASSWORD", "envenv")
 
@@ -29,7 +29,7 @@ func TestReadNormalWEnvCase(t *testing.T) {
 	os.Clearenv()
 }
 
-func TestReadNormalWoEnvCase(t *testing.T) {
+func TestConfig_Read_NormalWoEnvCase(t *testing.T) {
 	config := &Config{}
 
 	err := config.Read("./test/resources/config/test.toml")
@@ -47,7 +47,7 @@ func TestReadNormalWoEnvCase(t *testing.T) {
 	}
 }
 
-func TestReadRaiseErrorCase(t *testing.T) {
+func TestConfig_Read_RaiseErrorCase(t *testing.T) {
 	config := &Config{}
 
 	err := config.Read("./test/resources/does_not_exist.toml")
