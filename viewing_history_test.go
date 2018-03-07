@@ -5,9 +5,13 @@ import (
 	"time"
 	"bytes"
 	"io/ioutil"
+	"os"
+	"path/filepath"
 )
 
+// currently test fails on windows because of file path
 const timeLayout = "2006-01-02 15:04:05"
+const testResourceBasePath = "./test/resources/viewing_history"
 const withRecordJSONPath = "./test/resources/viewing_history/record.json"
 const lastUpdateJSONPath = "./test/resources/viewing_history/last_update.json"
 const fileDoesNotExistJSONPath = "./test/resources/viewing_history/file_does_not_exist.json"
@@ -92,6 +96,34 @@ func TestViewingHistory_Exist_DataNotExist(t *testing.T) {
 
 	if vh.ExistData(fileDoesNotExistJSONPath) {
 		t.Errorf("ExistData fails. Got true\n")
+	}
+}
+
+func TestViewingHistory_SaveData_Normal(t *testing.T) {
+	targetTime, _ := time.Parse(timeLayout, "2018-01-01 00:00:01")
+	setNow(targetTime)
+
+	vh :=&ViewingHistory{
+		Records: []ViewingRecord {
+			{Date: targetTime, Title: "title1", VideoURL: "url1"},
+			{Date: targetTime, Title: "title2", VideoURL: "url2"},
+		},
+		LastUpdate: targetTime,
+	}
+
+	dir, _ := ioutil.TempDir(testResourceBasePath, "tmp")
+	defer os.RemoveAll(dir)
+	tmpFileName := filepath.Join(dir, "tmp.json")
+
+	err := vh.SaveData(tmpFileName)
+
+	if err != nil {
+		t.Errorf("SaveData fails. %v\n", err)
+	}
+
+	_, err = os.Stat(tmpFileName)
+	if os.IsNotExist(err) {
+		t.Errorf("SaveData fils. file does not exist. %v\n", err)
 	}
 }
 
