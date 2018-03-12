@@ -2,7 +2,8 @@ netflix-activities
 ==================
 
 [![GitHub release](http://img.shields.io/github/release/noissefnoc/go-netflix-activities.svg?style=flat-square)][release]
-[![CircleCI](https://circleci.com/gh/noissefnoc/go-netflix-activities/tree/master.svg?style=svg)](https://circleci.com/gh/noissefnoc/go-netflix-activities/tree/master) [![Coverage Status](https://coveralls.io/repos/github/noissefnoc/go-netflix-activities/badge.svg?branch=master)](https://coveralls.io/github/noissefnoc/go-netflix-activities?branch=master)
+[![CircleCI](https://circleci.com/gh/noissefnoc/go-netflix-activities/tree/master.svg?style=svg)](https://circleci.com/gh/noissefnoc/go-netflix-activities/tree/master)
+[![Coverage Status](https://coveralls.io/repos/github/noissefnoc/go-netflix-activities/badge.svg?branch=master)](https://coveralls.io/github/noissefnoc/go-netflix-activities?branch=master)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)][license]
 
 [release]: https://github.com/noissefnoc/go-netflix-activities/releases
