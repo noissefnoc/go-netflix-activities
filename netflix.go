@@ -5,24 +5,26 @@ import (
 	"fmt"
 )
 
+// Netflix is struct for netflix page scraping
 type Netflix struct {
-	LoginUrl string
-	ViewingHistoryUrl string
+	LoginURL           string
+	ViewingHistoryURL  string
 	ViewingHistoryHTML []byte
-	Debug bool
+	Debug              bool
 }
 
 var netflixURL = "https://www.netflix.com"
 
 // Following CSS selectors may change various reasons.
 // So I extract those to variables.
-var loginFormIdSelector = "#email"
+var loginFormIDSelector = "#email"
 var loginFormPasswordSelector = "#password"
 var loginFormSubmitButtonSelector = ".login-button"
 var viewingHistoryListSelector = "li.retableRow"
 var viewingHistoryDateSelector = ".col.date.nowrap"
 var viewingHistoryTitleSelector = ".col.title a"
 
+// FetchViewingHistory is API to fetch Netflix viewing history by scraping
 func (n *Netflix) FetchViewingHistory(email string, password string) (error) {
 	// TODO: enable debug option
 	driver := agouti.ChromeDriver(
@@ -44,11 +46,11 @@ func (n *Netflix) FetchViewingHistory(email string, password string) (error) {
 		return fmt.Errorf("faild to open page:%v", err)
 	}
 
-	if err := page.Navigate(n.LoginUrl); err != nil {
+	if err := page.Navigate(n.LoginURL); err != nil {
 		return fmt.Errorf("failed to navigate:%v", err)
 	}
 
-	id := page.Find(loginFormIdSelector)
+	id := page.Find(loginFormIDSelector)
 	pass := page.Find(loginFormPasswordSelector)
 	id.Fill(email)
 	pass.Fill(password)
@@ -57,7 +59,7 @@ func (n *Netflix) FetchViewingHistory(email string, password string) (error) {
 		return fmt.Errorf("failed to login:%v", err)
 	}
 
-	if err := page.Navigate(n.ViewingHistoryUrl); err != nil {
+	if err := page.Navigate(n.ViewingHistoryURL); err != nil {
 		return fmt.Errorf("failed to navigate:%v", err)
 	}
 

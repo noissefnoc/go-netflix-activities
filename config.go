@@ -7,10 +7,12 @@ import (
 	"os"
 )
 
+// Config is struct for this program
 type Config struct {
 	Auth AuthConfig
 }
 
+// AuthConfig is struct for Netflix Authentication
 type AuthConfig struct {
 	Email string
 	Password string
