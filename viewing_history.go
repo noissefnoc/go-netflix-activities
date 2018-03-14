@@ -16,17 +16,20 @@ import (
 var timeNowFunc = time.Now
 var dateLayout = "2006/01/02"
 
+// ViewingHistory is struct for viewing history
 type ViewingHistory struct {
 	Records    []ViewingRecord
 	LastUpdate time.Time
 }
 
+// ViewingRecord is struct for record of viewing history
 type ViewingRecord struct {
 	Date time.Time
 	Title string
 	VideoURL string
 }
 
+// LoadFromHTML is API to load and parse viewing history from HTML
 func (vh *ViewingHistory) LoadFromHTML(html []byte) (error) {
 	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(html))
 
@@ -53,6 +56,7 @@ func (vh *ViewingHistory) LoadFromHTML(html []byte) (error) {
 	return nil
 }
 
+// LoadFromFile is API to load and parse viewing history from cached local file
 func (vh *ViewingHistory) LoadFromFile(path string) (error) {
 	if !vh.ExistData(path) {
 		return fmt.Errorf("file does not exists")
@@ -71,6 +75,7 @@ func (vh *ViewingHistory) LoadFromFile(path string) (error) {
 	return nil
 }
 
+// Expire is API to check if viewing history cached local file expired
 func (vh *ViewingHistory) Expire(path string, min int) (bool) {
 	if err := vh.LoadFromFile(path); err != nil {
 		return true
@@ -87,6 +92,7 @@ func (vh *ViewingHistory) Expire(path string, min int) (bool) {
 	return true
 }
 
+// ExistData is API to check if history cached local file exists
 func (vh *ViewingHistory) ExistData(path string) (bool) {
 	if _, err := os.Stat(path); err != nil {
 		return false
@@ -95,6 +101,7 @@ func (vh *ViewingHistory) ExistData(path string) (bool) {
 	return true
 }
 
+// SaveData is API to save viewing history as local file
 func (vh *ViewingHistory) SaveData(path string) (error) {
 	bdata, err := json.Marshal(vh)
 	if err != nil {
@@ -109,14 +116,16 @@ func (vh *ViewingHistory) SaveData(path string) (error) {
 	return nil
 }
 
-func (vh *ViewingHistory) Print(limit int, fromat string, w io.Writer) {
-	switch fromat {
+// Print is API to print viewing history
+func (vh *ViewingHistory) Print(limit int, format string, w io.Writer) {
+	switch format {
 	case "csv": vh.CsvPrint(limit, w);
 	case "table": vh.TablePrint(limit, w);
 	default: vh.SimplePrint(limit, w)
 	}
 }
 
+// SimplePrint is API to print viewing history as tsv without header
 func (vh *ViewingHistory) SimplePrint(limit int, w io.Writer) {
 	for i, r := range vh.Records {
 		if i > limit - 1 {
@@ -127,6 +136,7 @@ func (vh *ViewingHistory) SimplePrint(limit int, w io.Writer) {
 	}
 }
 
+// CsvPrint is API to print viewing history as csv with header
 func (vh *ViewingHistory) CsvPrint(limit int, w io.Writer) {
 	writer := csv.NewWriter(w)
 	writer.UseCRLF = true
@@ -143,6 +153,7 @@ func (vh *ViewingHistory) CsvPrint(limit int, w io.Writer) {
 	writer.Flush()
 }
 
+// TablePrint is API to print viewing history as tableau
 func (vh *ViewingHistory) TablePrint(limit int, w io.Writer) {
 	writer := tablewriter.NewWriter(w)
 	writer.SetHeader([]string{"view_date", "video_title", "video_url"})

@@ -8,7 +8,9 @@ import (
 )
 
 var (
+	// Version is variable for build version
 	Version string
+	// Revision is variable for build revision
 	Revision string
 )
 
@@ -43,8 +45,8 @@ func run(w io.Writer) (int) {
 		}
 	} else {
 		netflix := &Netflix{
-			LoginUrl : "https://netflix.com/jp/login",
-			ViewingHistoryUrl: "https://www.netflix.com/wiviewingactivity"}
+			LoginURL:          "https://netflix.com/jp/login",
+			ViewingHistoryURL: "https://www.netflix.com/wiviewingactivity"}
 
 		if err := netflix.FetchViewingHistory(config.Auth.Email, config.Auth.Password);
 			err != nil {

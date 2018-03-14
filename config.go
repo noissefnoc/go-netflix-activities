@@ -7,15 +7,18 @@ import (
 	"os"
 )
 
+// Config is struct for this program
 type Config struct {
 	Auth AuthConfig
 }
 
+// AuthConfig is struct for Netflix Authentication
 type AuthConfig struct {
 	Email string
 	Password string
 }
 
+// Read is API to read configurations from environmental variable or toml file
 func (c *Config) Read(path string) (err error) {
 	email := os.Getenv("NF_EMAIL")
 	password := os.Getenv("NF_PASSWORD")
