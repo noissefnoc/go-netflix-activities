@@ -18,6 +18,7 @@ type AuthConfig struct {
 	Password string
 }
 
+// Read is API to read configurations from environmental variable or toml file
 func (c *Config) Read(path string) (err error) {
 	email := os.Getenv("NF_EMAIL")
 	password := os.Getenv("NF_PASSWORD")
