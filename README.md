@@ -101,7 +101,7 @@ Other OS users can download binary from [release page](https://github.com/noisse
 And you can also use `go get`
 
 ```
-$ go get -u github.com/noissefnoc/netflix-activities
+$ go get -u github.com/noissefnoc/go-netflix-activities
 ```
 
 
