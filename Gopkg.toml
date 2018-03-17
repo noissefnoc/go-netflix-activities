@@ -31,5 +31,4 @@
 
 [[constraint]]
   name = "github.com/sclevine/agouti"
-  branch = "master"
-  source = "github.com/sclevine/agouti"
+  version = "3.0.0"

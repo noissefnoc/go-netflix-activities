@@ -7,47 +7,41 @@ import (
 
 // Netflix is struct for netflix page scraping
 type Netflix struct {
+	Driver             agouti.WebDriver
 	LoginURL           string
 	ViewingHistoryURL  string
-	ViewingHistoryHTML []byte
-	Debug              bool
 }
 
 var netflixURL = "https://www.netflix.com"
 
 // Following CSS selectors may change various reasons.
 // So I extract those to variables.
+// Login page selector
 var loginFormIDSelector = "#email"
 var loginFormPasswordSelector = "#password"
 var loginFormSubmitButtonSelector = ".login-button"
+
+// viewing history page selector
 var viewingHistoryListSelector = "li.retableRow"
 var viewingHistoryDateSelector = ".col.date.nowrap"
 var viewingHistoryTitleSelector = ".col.title a"
 
 // FetchViewingHistory is API to fetch Netflix viewing history by scraping
-func (n *Netflix) FetchViewingHistory(email string, password string) (error) {
-	// TODO: enable debug option
-	driver := agouti.ChromeDriver(
-		agouti.ChromeOptions("args", []string{
-			"--headless",
-			"--disable-gpu",
-			"--allow-insecure-localhost",
-		}),
-	)
-
-	if err := driver.Start(); err != nil {
-		return fmt.Errorf("failed to start driver:%v", err)
+func (n *Netflix) FetchViewingHistory(email string, password string) ([]byte, error) {
+	// / start login
+	if err := n.Driver.Start(); err != nil {
+		return nil, fmt.Errorf("failed to start driver:%v", err)
 	}
-	defer driver.Stop()
+	defer n.Driver.Stop()
 
-	page, err := driver.NewPage()
+	page, err := n.Driver.NewPage()
 
 	if err != nil {
-		return fmt.Errorf("faild to open page:%v", err)
+		return nil, fmt.Errorf("faild to open page:%v", err)
 	}
 
 	if err := page.Navigate(n.LoginURL); err != nil {
-		return fmt.Errorf("failed to navigate:%v", err)
+		return nil, fmt.Errorf("failed to navigate:%v", err)
 	}
 
 	id := page.Find(loginFormIDSelector)
@@ -56,20 +50,20 @@ func (n *Netflix) FetchViewingHistory(email string, password string) (error) {
 	pass.Fill(password)
 
 	if err := page.Find(loginFormSubmitButtonSelector).Submit(); err != nil {
-		return fmt.Errorf("failed to login:%v", err)
+		return nil, fmt.Errorf("failed to login:%v", err)
 	}
+	// end login
 
+	// viewing history page
 	if err := page.Navigate(n.ViewingHistoryURL); err != nil {
-		return fmt.Errorf("failed to navigate:%v", err)
+		return nil, fmt.Errorf("failed to navigate:%v", err)
 	}
 
 	html, err := page.HTML()
 
 	if err != nil {
-		return fmt.Errorf("failed to get html:%v", err)
+		return nil, fmt.Errorf("failed to get html:%v", err)
 	}
 
-	n.ViewingHistoryHTML = []byte(html)
-
-	return err
+	return []byte(html), err
 }

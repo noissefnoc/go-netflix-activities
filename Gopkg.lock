@@ -32,21 +32,20 @@
   revision = "b8a9be070da40449e501c3c4730a889e42d87a9e"
 
 [[projects]]
-  branch = "master"
   name = "github.com/sclevine/agouti"
   packages = [".","api","api/internal/bus","api/internal/service","internal/element","internal/target"]
-  revision = "8cf0313221cb2c26a4059f8e273c0856b4cb091d"
-  source = "github.com/sclevine/agouti"
+  revision = "e3f6c97a4077ad821daab49db8172cf9f6690faf"
+  version = "v3.0.0"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = ["html","html/atom"]
-  revision = "cbe0f9307d0156177f9dd5dc85da1a31abc5f2fb"
+  revision = "e0c57d8f86c17f0724497efcb3bc617e82834821"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "56701fa25f7e2c300e757f36c2a3f24c0a8f96674956d3b61c4d940c58a8972f"
+  inputs-digest = "8560802635dd463c37cb575d0d72f2c088e4a5c15765e74e0907bdf7cfe0b22c"
   solver-name = "gps-cdcl"
   solver-version = 1

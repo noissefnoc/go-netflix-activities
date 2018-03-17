@@ -5,6 +5,7 @@ import (
 	"os"
 	"io"
 	"flag"
+	"github.com/sclevine/agouti"
 )
 
 var (
@@ -44,17 +45,27 @@ func run(w io.Writer) (int) {
 			return 1
 		}
 	} else {
+		driver := agouti.ChromeDriver(
+			agouti.ChromeOptions("args", []string{
+				// cat"--headless",
+				"--disable-gpu",
+				"--allow-insecure-localhost",
+			}),
+		)
+
 		netflix := &Netflix{
+			Driver:            *driver,
 			LoginURL:          "https://netflix.com/jp/login",
 			ViewingHistoryURL: "https://www.netflix.com/wiviewingactivity"}
 
-		if err := netflix.FetchViewingHistory(config.Auth.Email, config.Auth.Password);
-			err != nil {
+		html, err := netflix.FetchViewingHistory(config.Auth.Email, config.Auth.Password)
+
+		if err != nil {
 			fmt.Printf("failed to fetch viewing history:%v\n", err)
 			return 1
 		}
 
-		if err := vh.LoadFromHTML(netflix.ViewingHistoryHTML); err != nil {
+		if err := vh.LoadFromHTML(html); err != nil {
 			fmt.Printf("failed to parse viewing history(remote):%v\n", err)
 			return 1
 		}
