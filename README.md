@@ -11,6 +11,7 @@ netflix-activities
 
 `netflix-activities` fetches Netflix User's Own Activities by Scraping.
 
+**NOTE**: THIS PROGRAM IS NOT WORKING NOW(3/17-). Maybe Netflix login page has some change. I'll fix next version.
 
 Usage
 -----
